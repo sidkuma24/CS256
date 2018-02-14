@@ -18,11 +18,13 @@ maxIters = 100000
 exit = False
 iter = 0
 minVal = f(x[0],x[1])
-
+print (str(x) + " " + str(f(x[0],x[1])) + " " + str(d1(x[0],x[1])) + " " + str(d2(x[0],x[1])))
+df = np.array([d1(x[0],x[1]),d2(x[0],x[1])])
 
 while exit == False:
 	df = np.array([d1(x[0],x[1]),d2(x[0],x[1])])
 	x = x - learningRate * df
+	df = np.array([d1(x[0],x[1]),d2(x[0],x[1])])
 	print (str(x) + " " + str(f(x[0],x[1])) + " " + str(df[0]) + " " + str(df[1]))
 	if abs(x.any()) < theta: exit = True;
 	if iter > maxIters : exit = True
