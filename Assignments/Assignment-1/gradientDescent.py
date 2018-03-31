@@ -1,5 +1,4 @@
 import numpy as np
-from scipy.optimize import fmin
 import math
 
 def f(x1,x2):
@@ -13,31 +12,23 @@ def d2(x1,x2):
 
 x = np.array([1,-3])
 learningRate = 0.1
-theta = 0.0001
-maxIters = 100000
+theta = 0.001
+maxIters = 200
 exit = False
-iter = 0
+niter = 0
 minVal = f(x[0],x[1])
 print (str(x) + " " + str(f(x[0],x[1])) + " " + str(d1(x[0],x[1])) + " " + str(d2(x[0],x[1])))
 df = np.array([d1(x[0],x[1]),d2(x[0],x[1])])
 
 while exit == False:
-	df = np.array([d1(x[0],x[1]),d2(x[0],x[1])])
+	if abs(x.any()) < theta: exit = True;
+	if niter > maxIters : exit = True
 	x = x - learningRate * df
 	df = np.array([d1(x[0],x[1]),d2(x[0],x[1])])
 	print (str(x) + " " + str(f(x[0],x[1])) + " " + str(df[0]) + " " + str(df[1]))
-	if abs(x.any()) < theta: exit = True;
-	if iter > maxIters : exit = True
-	if minVal < f(x[0],x[1]) : exit = True;
-	minVal = f(x[0],x[1]);
-	iter = iter +1
+	niter += 1
 
 
-print ("No of iterations: ",iter)
-print ("Minval : ",minVal)
+print ("No of iterations: ",niter)
+print ("Minval : ",f(x[0],x[1]))
 
-def f1(x):
-	return(1.5*(x[0]**2) + x[1]**2 - 2*x[0]*x[1] + 0.5*(x[0]**4))
-
-min = fmin(f1,x)
-print("Min:",min)
