@@ -1,0 +1,1425 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Assignment-2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{MLP character model. Code adapted from https://github.com/keras\PYZhy{}team/keras/blob/master/examples/lstm\PYZus{}text\PYZus{}generation.py}
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k}{import} \PY{n}{print\PYZus{}function}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{callbacks} \PY{k}{import} \PY{n}{LambdaCallback}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Sequential}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Dense}\PY{p}{,} \PY{n}{Activation}\PY{p}{,} \PY{n}{Flatten}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{LSTM}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{optimizers} \PY{k}{import} \PY{n}{RMSprop}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{utils}\PY{n+nn}{.}\PY{n+nn}{data\PYZus{}utils} \PY{k}{import} \PY{n}{get\PYZus{}file}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{k+kn}{import} \PY{n+nn}{sys}
+        \PY{k+kn}{import} \PY{n+nn}{io}
+        
+        \PY{n}{path} \PY{o}{=} \PY{n}{get\PYZus{}file}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nietzsche.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{origin}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://s3.amazonaws.com/text\PYZhy{}datasets/nietzsche.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{with} \PY{n}{io}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{n}{path}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+            \PY{n}{text} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{corpus length:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{chars} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{total chars:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}
+        \PY{n}{char\PYZus{}indices} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{(}\PY{n}{c}\PY{p}{,} \PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}
+        \PY{n}{indices\PYZus{}char} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{c}\PY{p}{)} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} cut the text in semi\PYZhy{}redundant sequences of maxlen characters}
+        \PY{n}{maxlen} \PY{o}{=} \PY{l+m+mi}{40}
+        \PY{n}{step} \PY{o}{=} \PY{l+m+mi}{3}
+        \PY{n}{sentences} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{next\PYZus{}chars} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{text}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{maxlen}\PY{p}{,} \PY{n}{step}\PY{p}{)}\PY{p}{:}
+            \PY{n}{sentences}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{text}\PY{p}{[}\PY{n}{i}\PY{p}{:} \PY{n}{i} \PY{o}{+} \PY{n}{maxlen}\PY{p}{]}\PY{p}{)}
+            \PY{n}{next\PYZus{}chars}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{text}\PY{p}{[}\PY{n}{i} \PY{o}{+} \PY{n}{maxlen}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nb sequences:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{sentences}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Vectorization...}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sentences}\PY{p}{)}\PY{p}{,} \PY{n}{maxlen}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{bool}\PY{p}{)}
+        \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sentences}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{bool}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{sentence} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{sentences}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{t}\PY{p}{,} \PY{n}{char} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{sentence}\PY{p}{)}\PY{p}{:}
+                \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{char\PYZus{}indices}\PY{p}{[}\PY{n}{char}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{char\PYZus{}indices}\PY{p}{[}\PY{n}{next\PYZus{}chars}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+        
+        
+        \PY{k}{def} \PY{n+nf}{build\PYZus{}model}\PY{p}{(}\PY{n}{maxlen}\PY{p}{,} \PY{n}{chars}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} build the model: an MLP with 1 hidden layer}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Build model...}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{model} \PY{o}{=} \PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+            \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Flatten}\PY{p}{(}\PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{p}{(}\PY{n}{maxlen}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{128}\PY{p}{)}\PY{p}{)}
+            \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Activation}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        
+            \PY{n}{optimizer} \PY{o}{=} \PY{n}{RMSprop}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{)}
+            \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{optimizer}\PY{o}{=}\PY{n}{optimizer}\PY{p}{)}
+        
+            \PY{k}{return} \PY{n}{model}
+        
+        \PY{k}{def} \PY{n+nf}{sample}\PY{p}{(}\PY{n}{preds}\PY{p}{,} \PY{n}{temperature}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} helper function to sample an index from a probability array}
+            \PY{n}{preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{preds}\PY{p}{)} \PY{o}{/} \PY{n}{temperature}
+            \PY{n}{exp\PYZus{}preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{preds}\PY{p}{)}
+            \PY{n}{preds} \PY{o}{=} \PY{n}{exp\PYZus{}preds} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{exp\PYZus{}preds}\PY{p}{)}
+            \PY{n}{probas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{multinomial}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{preds}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{probas}\PY{p}{)}
+        
+        
+        \PY{k}{def} \PY{n+nf}{on\PYZus{}epoch\PYZus{}end}\PY{p}{(}\PY{n}{epoch}\PY{p}{,} \PY{n}{logs}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Function invoked at end of each epoch. Prints generated text.}
+            \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} Generating text after Epoch: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{epoch}\PY{p}{)}
+        
+            \PY{n}{start\PYZus{}index} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{text}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{maxlen} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{k}{for} \PY{n}{diversity} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{1.2}\PY{p}{]}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} diversity:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{diversity}\PY{p}{)}
+        
+                \PY{n}{generated} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+                \PY{n}{sentence} \PY{o}{=} \PY{n}{text}\PY{p}{[}\PY{n}{start\PYZus{}index}\PY{p}{:} \PY{n}{start\PYZus{}index} \PY{o}{+} \PY{n}{maxlen}\PY{p}{]}
+                \PY{n}{generated} \PY{o}{+}\PY{o}{=} \PY{n}{sentence}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} Generating with seed: }\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{sentence} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{generated}\PY{p}{)}
+        
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{400}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{x\PYZus{}pred} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{maxlen}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                    \PY{k}{for} \PY{n}{t}\PY{p}{,} \PY{n}{char} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{sentence}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{x\PYZus{}pred}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{char\PYZus{}indices}\PY{p}{[}\PY{n}{char}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{1.}
+        
+                    \PY{n}{preds} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x\PYZus{}pred}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                    \PY{n}{next\PYZus{}index} \PY{o}{=} \PY{n}{sample}\PY{p}{(}\PY{n}{preds}\PY{p}{,} \PY{n}{diversity}\PY{p}{)}
+                    \PY{n}{next\PYZus{}char} \PY{o}{=} \PY{n}{indices\PYZus{}char}\PY{p}{[}\PY{n}{next\PYZus{}index}\PY{p}{]}
+        
+                    \PY{n}{generated} \PY{o}{+}\PY{o}{=} \PY{n}{next\PYZus{}char}
+                    \PY{n}{sentence} \PY{o}{=} \PY{n}{sentence}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{+} \PY{n}{next\PYZus{}char}
+        
+                    \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{next\PYZus{}char}\PY{p}{)}
+                    \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{flush}\PY{p}{(}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+        
+        \PY{k}{if} \PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+            \PY{n}{print\PYZus{}callback} \PY{o}{=} \PY{n}{LambdaCallback}\PY{p}{(}\PY{n}{on\PYZus{}epoch\PYZus{}end}\PY{o}{=}\PY{n}{on\PYZus{}epoch\PYZus{}end}\PY{p}{)}
+        
+            \PY{n}{model} \PY{o}{=} \PY{n}{build\PYZus{}model}\PY{p}{(}\PY{n}{maxlen}\PY{p}{,} \PY{n}{chars}\PY{p}{)}
+        
+            \PY{k+kn}{import} \PY{n+nn}{ipdb}\PY{p}{;} 
+            
+            \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}
+                \PY{n}{x}\PY{p}{,}
+                \PY{n}{y}\PY{p}{,}
+                \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{128}\PY{p}{,}
+                \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{60}\PY{p}{,}
+                \PY{n}{callbacks}\PY{o}{=}\PY{p}{[}\PY{n}{print\PYZus{}callback}\PY{p}{]}
+            \PY{p}{)}
+            \PY{n}{ipdb}\PY{o}{.}\PY{n}{set\PYZus{}trace}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using TensorFlow backend.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+corpus length: 600893
+total chars: 57
+nb sequences: 200285
+Vectorization{\ldots}
+Build model{\ldots}
+Epoch 1/60
+200285/200285 [==============================] - 17s 85us/step - loss: 2.5459
+
+----- Generating text after Epoch: 0
+----- diversity: 0.2
+----- Generating with seed: ", that he has
+acted in everything with m"
+, that he has
+acted in everything with mes in o athise vid is thithe this dore phis phis perate, and med insily this chithis chithis aen of the and encof in is of the sumely an as and and an thithe an in the and al the menthe and ved hich many his sicheras and aus and ind in the as of as ale med an the s male s mal ad as in med ins an as and ans and amen mas mont of ill and mesthit mof in the as of as in the as ind is the
+desthis ches i
+----- diversity: 0.5
+----- Generating with seed: ", that he has
+acted in everything with m"
+, that he has
+acted in everything with med miny hathof ce alo ghe pesely his the dof and aumely; and iund at ouly is his de are
+at oo phis siere aly acithe forthist at of mh thiche s alides chithiss lo shis me this apself ale st
+le pores ins and this whichale s in the monol and mon mene singly men th is of ond as of
+his men of so meliss aad as are the co ale se andamely
+th his erally ape mid this as lfolsy and at
+ur and an mole ase dis 
+----- diversity: 1.0
+----- Generating with seed: ", that he has
+acted in everything with m"
+, that he has
+acted in everything with merypmeho ow, hhelay in whis
+m: thaby of theostipe. alc aica siriod,
+-soneskth, hhincilfore domsimfod ilichen,
+ess mowt his porf sad yo mis s icullo and oup
+th be whic dise cas the, pos vertet, and,
+onsiminyly., werle fonishiledy deis
+agry,oghiessssoff tha selvod aderofstictucallist."
+
+an soflintery ts thor, shitcologe ssen,
+andofed lo mel fon thas nm mely-thiil ofores sat hy uivedis seous
+his whic
+----- diversity: 1.2
+----- Generating with seed: ", that he has
+acted in everything with m"
+, that he has
+acted in everything with mesins
+los
+obeorngef mayr rchtast eor allabsty-morlysys ther-ey as hmugliy.pe
+ry.--hewors chislighighidgfyoris
+wsinothoplypoesi stocor asd cletidear oang ammnsitevif o
+bly bo thus rothat for ccitt euthe falllasund ond ius lomp
+les phete- ho m aly atd fupulofy, whrtitiny,
+exblitto t ehme aut
+so y afruld, awe th gepermusisisrhis evary cesriny. ly teep os eemtret hoo puicinve tr thot. ino it.
+ 5ty tha
+Epoch 2/60
+200285/200285 [==============================] - 17s 85us/step - loss: 2.4617
+
+----- Generating text after Epoch: 1
+----- diversity: 0.2
+----- Generating with seed: "ed unconsciously and accidentally. they "
+ed unconsciously and accidentally. they wore the merin tin the munth
+
+forlentinte the
+
+mont the the knowher the ther ther the pure
+prouthe singhe
+rantrentithe cheverounthe shithe she
+mantere the
+murthe the ther the the mant re
+the mont of
+ron tre the masing tont ker that te furte thor ther
+that
+of ghe
+wherhe sonter forthe therethor ther
+merturery the
+soune there sher the mothe  forther the
+
+for the the whith the
+the hare the herthe that
+----- diversity: 0.5
+----- Generating with seed: "ed unconsciously and accidentally. they "
+ed unconsciously and accidentally. they whin the mothar thin the the prerount
+st gheruthir thare ghan thered wed re the
+montha monke
+the
+gerer tore whing the thar thoust ermunt and
+grithe wored hiven ther thount ont he there bot
+
+aud ne whath sithous ther techure
+these sedingonthe stint of
+ure lfuthe the thow that of the
+ghorl wireny
+and grawtit theritho ghar the that
+
+aver uthe tion brerte
+thom. the te be the ture
+futhe sfouls of
+and i
+----- diversity: 1.0
+----- Generating with seed: "ed unconsciously and accidentally. they "
+ed unconsciously and accidentally. they oomanis none rg dognenn
+ly
+cund asughe pociestre ter fuconthet ond ind herd
+dg
+ferd fartoumt hithe canferigran the
+ titimy-ct manime as case s tha
+ghithas
+hlecanduno reditotrere,
+l5rextemer-therithionther lo
+d -romtre,
+chissutyas tachangsevant r thise fromsthengitstier, wiveroutse
+warn sa nithe boucha ce mughond and, ivelonthin
+s onthiouous.
+
+2a4 nofretidr: -th mesiantion, theesthong
+
+fhe
+cndiund 
+----- diversity: 1.2
+----- Generating with seed: "ed unconsciously and accidentally. they "
+ed unconsciously and accidentally. they shamgenid my hanellim
+aaf
+lermanexrityfend s, the thever perthrunemessing
+int
+on inghenrpeevare-sdority tuat lr in mthicksrl4st, kondiverin- a whad and
+arastrod; an of manlthephimment thil thenolithe faly
+turuntlry. than iom
+.owly. werqueny heryyllrectede noneitr,
+te phisksentot bulumer,
+choruthecedrinools- formits ermt the
+gheperucn sicall itpoop.
+btir blec roust fueucarl bot,
+lu thauduqued w mas
+Epoch 3/60
+200285/200285 [==============================] - 17s 84us/step - loss: 2.4423
+
+----- Generating text after Epoch: 2
+----- diversity: 0.2
+----- Generating with seed: " is bound to some such indiscreet billy-"
+ is bound to some such indiscreet billy-perere pore man fomes for of the pand and mont wor the fore wanco the wore ion re the to the tome tod fople to mot expere to the whace te the the tore the to the the fore the fope pore fome io the for the to for the tored fon the tore tome fore to the tommean to the ther the sompees po tobe to luthe for the tome fore to the the tope to be to to to lo the to f the the for the to le poule fo to the 
+----- diversity: 0.5
+----- Generating with seed: " is bound to some such indiscreet billy-"
+ is bound to some such indiscreet billy-peroed pasplescof and tall ase tore hame to thecovely atle too sore the fot on the propreserporet on thamerero tor fol tha thay to the pod wof re tor the the tome to the were tod  toumbee tod pore to the ce tomal tod to they to "gace to the f oustion wor to mone to the the tome the too got " the we the fon the po sero go the tome for poreseto the tomerece for tome to the mpe foume. t to le the ore
+----- diversity: 1.0
+----- Generating with seed: " is bound to some such indiscreet billy-"
+ is bound to some such indiscreet billy-penescest thecolssenitd, tores, anweritangicl" tom ros torm no tortye of lo d timtie fon tis, os derto lusleque to  nverieg ter al det; at pord porouber gat tt ita ofal ty, tike tho gutin? the wonl que ene fore pryseo) peopisoog inman agit ato ag tha songareby, ats am te add ys ichita mpanitrereo, anque e os tog
+perele wa
+drot on th n the d make to the kempnesta tor alm, wit of rmejevery af dace d
+----- diversity: 1.2
+----- Generating with seed: " is bound to some such indiscreet billy-"
+ is bound to some such indiscreet billy--andingus bjeit ec sf conte onnt nistlo
+the wor m them ns hta justeve 
+b olamily. the hery bolo que tto ghatior he lo
+pemptioto and wure becm ta "whike wata dung pormain thel of aneat tak os theverall -t 
+anl sas ig ao  tte bel tas, isw latel ng ataly iongell, thapercanon ys fum"nilr foctescole t, jurysase 'r the if carabe tap oo an"gros at eamweas yst fonoveriegiano woalassan d
+oust msa lomume ta
+Epoch 4/60
+200285/200285 [==============================] - 17s 87us/step - loss: 2.4359
+
+----- Generating text after Epoch: 3
+----- diversity: 0.2
+----- Generating with seed: "ition, without which the
+expression itse"
+ition, without which the
+expression itse fure the f amenthit illerathe themperis the the thes at the here the themesthe the hers as muth the remuthe the hers ate the the hamuthe the hemurthe them the he he here here the the theresthe thethe
+the the heres and the hers ast he hemerthe the there the serthe the here here the the the hams hat the the the the hers hat the sterthe
+the hestertument the hampelfer him the reat at as the hestere i
+----- diversity: 0.5
+----- Generating with seed: "ition, without which the
+expression itse"
+ition, without which the
+expression itse furend the furkent alleke fre ther athe tamte the heruat the hs ablenthe reat at ale the the or onethe the enthe
+hthe them-ato hto the hemull of the hame ar ass ches the the
+on the in tue the re the the ehs the thame the the chats at the sem the thes humentule the
+s
+chimathe  hemule denthe cherewilles averutheer aitionthithe hemallatowthat alleatthe of thes at onr aiveluthe the hertere thamest in
+----- diversity: 1.0
+----- Generating with seed: "ition, without which the
+expression itse"
+ition, without which the
+expression itsenat ao here ofllaks timatry mhilltof thether usterming cems er
+juct oe cawe co temptempente. at ure the hher sumalf treeramse frs ifstive ing aimols (whe be burino  ; el? gever aus ones uhlor th esmune tha thei inis of the whem thmure thes act bulkeme aed
+mathereledentinol, iad on hheply ef therst hhe vir hafor. the wore hamasithet ableaition,
+amporeercumanwestablingrmuther ferentirkenf.--thisod, 
+----- diversity: 1.2
+----- Generating with seed: "ition, without which the
+expression itse"
+ition, without which the
+expression itseiadl mebline, ondurouf l(tek of thr ahs, alr chumrmas resod meraukent, the
+what a bemprrald
+cel awo iha belcremple spertfenedve, in shamurthe  ofmuntefimmevery-dof ogr -he mulkerw
+ans dree: tingin thedregezaty anepuvesso-ithilur futh upcass.ays arbe ce hal as turelomeea i ss af, astthece,"bud." iess wheatag  phamos meot ta thewhwin at aris
+sunt atine ofylesans cherilf revelf roulf all asts biekvog
+Epoch 5/60
+200285/200285 [==============================] - 17s 84us/step - loss: 2.4305
+
+----- Generating text after Epoch: 4
+----- diversity: 0.2
+----- Generating with seed: "n what may be understood as one's
+advant"
+n what may be understood as one's
+advanthe of res the s of the re che is and the prestion the mpresthe the the ster the the the men ment ment and the mes le fore the the preatin the the the ha che it men mathe the the mane the the man the the mune mentithe the ghe man the mas the man the the ho mes on the the the the the che man the the the the che the the the the the the the the the the the the che the the the the the the che the the t
+----- diversity: 0.5
+----- Generating with seed: "n what may be understood as one's
+advant"
+n what may be understood as one's
+advant whe hen se fill becomey, chos the ry the sees the terd the the ghas the; the mer the the mous the he re freminct en thes rom tion the preceste tho ghos; the rel the s mprelits of chitge this ce pre fulle en whe ing tof en moral yo ver the there the preit rom the thitg the mal the the che the men the tho ghe mas the the excense conding tha man the the cheris int etr chese mant and pretite tho hmat
+----- diversity: 1.0
+----- Generating with seed: "n what may be understood as one's
+advant"
+n what may be understood as one's
+advant
+an ticll as in arthit  of rleycan a d theg derifrot tolll te--ane tin th mpllis a ns me tseure s baonght ing hemond fiesilstrloweul
+ose be reverd meys ind wooh --wher  who thee cermes blofery, whel anpre of mandly, rabroneves in and romenalitnithha, to, thas ocaspsestowascinsthes thendevery uns apios thas thaiptheytione,--thas by the mesicnien uth pancesspty, co re
+ahed ubthe the s ofrititho gran
+----- diversity: 1.2
+----- Generating with seed: "n what may be understood as one's
+advant"
+n what may be understood as one's
+advanthe ces bieas thent resster it is st--phe
+the, trethis stubly oncerits ghomini nt theourot ef anmante thes ryt wo hp paspen--it ra. inn
+misncublda sertisy."-athiew
+onato thanc ong haibllfore theullosion
+prellymeismany! dnugresithowe houl of isn wthex an? ehe  hithe need lpeaco nd buan es itos\_;s--thacw acco!tho  pa bmin thal thegrueldonoto- wh eracissiend, whal cat fored na meveid otores tha wmal s
+Epoch 6/60
+200285/200285 [==============================] - 16s 81us/step - loss: 2.4254
+
+----- Generating text after Epoch: 5
+----- diversity: 0.2
+----- Generating with seed: "." so reasoned mankind at one time, and "
+." so reasoned mankind at one time, and to se thes and tod ther as the thes and thing the st the fis thing this the stoul mane the stous thith thes the there them ther thing tom the
+samune them and sely and toment his the stous this the stalithe
+soment and the maling the sall toong them ancalion,
+and thithe toreand theresthe toull the theresting and the thaling tong thit them.
+the son thy as the st of thit cand tof the there thing the t
+----- diversity: 0.5
+----- Generating with seed: "." so reasoned mankind at one time, and "
+." so reasoned mankind at one time, and withe and the vically bo mores and and at the there hes blingoun s the mand the moner than monest toat and he thes mare talite ar them.
+ing toull merere
+fraling songlized and and ssorest an thas the in themante then thing this tore
+fare ment al te trem. ton thisgol and more fingre thithithit ol the  thepresthe s rous fol andis the at mon ther ats lofis te the fally
+in sones the tural ta the solly 
+----- diversity: 1.0
+----- Generating with seed: "." so reasoned mankind at one time, and "
+." so reasoned mankind at one time, and ro eve toren the
+sedeitond ang taligot  haplareding thes toringungro th artin thigat: thate ingrinoly thitimstise that
+chardenis strrughtem ansutr ankill andy thelllict and blinit ch ianlotedis sonedothe asding
+ghithil seemyoun--hol ad inos of d" aving calispthe s on thend
+phest theprrstte oust afd at ancertel: thaprielsoton safornts es thur-dis  of
+elpertoung, ind andelousign," wadlfyit pulld"mad
+----- diversity: 1.2
+----- Generating with seed: "." so reasoned mankind at one time, and "
+." so reasoned mankind at one time, and estuy p inad te ssef--ly sop of buritp ina ped ruits--thsmon prys inghand--womlizod. scord atsdopiris shistintess-entitestoudsmunoumsthall ofeppicturiss my in ofwisece tsem no st."--apen. thecirrishisg topr tio tare ofdeliom; ald hitheve tor hardichatrraggonis
+caceuct it eof wirel blectome!"--t ciemond srmanze ounty, buacl of in s"--pols
+itsulongitnd thines, us thaplyhianion, an tuman more aruslly
+Epoch 7/60
+200285/200285 [==============================] - 17s 87us/step - loss: 2.4243
+
+----- Generating text after Epoch: 6
+----- diversity: 0.2
+----- Generating with seed: "t is regarded as the
+only thing that can"
+t is regarded as the
+only thing that cand mont of il the ghim the core the rovery and inge be the roule to ghis doperatn the har cament inger tor marid this anderot er the ros, ing of mere tore fore the firment
+or mantiry, and comand the for ther ange fore the hamer ing of coprehe noughe so ghamperithas
+ hamere nf ore have the hor mand more for ham, the har he hore ther cher ange no the
+
+114
+
+=here dary porian ixperfent of hare than the
+----- diversity: 0.5
+----- Generating with seed: "t is regarded as the
+only thing that can"
+t is regarded as the
+only thing that cand there nor if the thol whangho s
+perpe nomplen sol the be the hare ther beed be or bed and thore der porsisto th ingerer orcesed ing of copernand thar the hames, formath thomesnat soprecomon ththere salf thencempanar the for ing ore ther an ther and
+mange the indernot bat an the thexcepinnos of ar the
+ramprof ste thom, her andand do marin the vered on the or mare rathe fore har arexceprato of are
+----- diversity: 1.0
+----- Generating with seed: "t is regarded as the
+only thing that can"
+t is regarded as the
+only thing that candexcepinnongid tho jexat theredmenithe "f aroimandiritegha; fore iompelfoe has  thes tor bat existsef exayninale's ore ither acomesom erimithis dewmoca whichalm nt whace hare it--phrerempey sore pits
+latcerath
+r thar, rowisthot, ther arsenors ig ikn ile ger
+all in is foment chess. th iamser thity keng tore the t ithast, thare mpersobly ngerequatger
+ofermpongo, isaly tooramant o gorwe haprobins io 
+----- diversity: 1.2
+----- Generating with seed: "t is regarded as the
+only thing that can"
+t is regarded as the
+only thing that cand moverolaws ch ploism pofitenuthe ahyimans, for dngere dowerlownoquinly co wh rovepin
+an ecruter goo thepry,: "tot malo wa th muthat shacian monverand
+mance pbefwsol' inspithe sal'sreen, th thiigh. , cespther, arriacd asby ef counce they sof whork nokered commswl: whouriond hs or mats bod arcisid
+-hoves an ercarcorpith he evag ramerlt icind, as io
+doufre hor the g wh" opeshiny o d
+toquihby,
+hom h
+Epoch 8/60
+200285/200285 [==============================] - 17s 83us/step - loss: 2.4239
+
+----- Generating text after Epoch: 7
+----- diversity: 0.2
+----- Generating with seed: "t does not require deliberation. as soon"
+t does not require deliberation. as soon the gon well on be no men as the his se s an the baco se f an eren the gro in mon the s an ches and it an the so s in ble who  he mat on th is an or an the wall ch s an ing or an in an as an so
+s an whin the chas an f of the s an fin the bat he mon tho s an the pacho t al an on be on whing ion an on the be no serf che f an the ghe sons is an on ar an is ble in s an an the s an of an  he mang the 
+----- diversity: 0.5
+----- Generating with seed: "t does not require deliberation. as soon"
+t does not require deliberation. as soon the go at en the
+men or fot in been co silf and rers al se fereelo d se foching on mas in
+
+f co the s of the s an in all on ha derigro for the an thos the whil  he ha phes and an on geres tho g of the beco fer in pionos ing ang at ches io bat of mon  hangitho es in ses ace be meres in whe he se fer me pras an s of mant in sals an
+beleso thit an chon thon the profist he we he for thin ther and sil
+----- diversity: 1.0
+----- Generating with seed: "t does not require deliberation. as soon"
+t does not require deliberation. as soon chow mas amer rod fove to geo
+s f if noldon nhtincasise
+fes pr eos of ofsctin sof en isre, one ss s btit ces micho woch aquele wave
+wanchiero annextite, obeermesed lo so feri grte tha shimpseos aribli giog exervin
+o an for bles comerly. the sis tredicl oravo te ros sunteroligilngrousir cat ans is
+ely al, sperlobicn thon thomithe hir  aonco se foce tora ce st oes the fel mein p
+iso bie te ins io f
+----- diversity: 1.2
+----- Generating with seed: "t does not require deliberation. as soon"
+t does not require deliberation. as soonvelles
+phis phito lint, chy upho religns ee po toseghinis ld ao seriacs au tol  no wat
+o this tod no wom he ss,
+u woad to thosese chon ut an salithire ste de mith pangioutt ko a oo shu bein os celluga ritis ss, ion mpch"mas ees
+on
+ciontisince
+feldsored ; thod inpertipas o bo he" wion don urt futho m e
+then tassit--isino:  he tho wos alo
+ned iranc chorhe, ail qulel, tha's hseiver alo
+gan bion, and 
+Epoch 9/60
+200285/200285 [==============================] - 18s 88us/step - loss: 2.4259
+
+----- Generating text after Epoch: 8
+----- diversity: 0.2
+----- Generating with seed: " individuality.
+
+
+95
+
+=ethic of the deve"
+ individuality.
+
+
+95
+
+=ethic of the deved an=--do withery ires ofor thered atity andict of omed, as and werchesery his of and nof chit in sere the sorese
+songere the se whe s of chere sery why he
+sedity of int and ind rodesting is whid thes whof rof the red the fure nof the stery af the
+serery: whe whil the desther ondede, and the fores lf onderery the so which werer he f red wion the the se wher the s which of are dey of
+res which mery
+----- diversity: 0.5
+----- Generating with seed: " individuality.
+
+
+95
+
+=ethic of the deve"
+ individuality.
+
+
+95
+
+=ethic of the deved an=--as and doved in the so the why here of ond trodescars antse for is which mong the ser aalurs,
+in iveny he hes wald wore iny he delits ero
+sowhin wheld athe s ing if ame to which the he dire wher the s whes whind tored toveryed thes thes ef therenser the phesesery he ss of ure
+why his an we chequedy onof inged, sof no whos harsery co toperystity ty hiss are sored iny raty ar whice the the he
+----- diversity: 1.0
+----- Generating with seed: " individuality.
+
+
+95
+
+=ethic of the deve"
+ individuality.
+
+
+95
+
+=ethic of the devedede=--dieton, hy tie
+sododiond, aved acteera--touady, aterytof iris yuad
+oferid oust, iver werthos, hoo nime at teed kson an mare,
+diviincca; ase onde no hope faymserold inndese,
+ro monits, divesthe hiro
+therraly urthity, f rotevy to icollay on, are burtate citledede, ave thes wheon
+dimperanty he stintang sof, minglicod unstrandedenfof therecauntity nebot of them, as nce torontys toes
+of chere--t
+----- diversity: 1.2
+----- Generating with seed: " individuality.
+
+
+95
+
+=ethic of the deve"
+ individuality.
+
+
+95
+
+=ethic of the deveond beod taithedf ameus, fareom, ood no, eved rimpilct, toprid wpllerdev beat t" wescratlsteund oty nwelle,-ehquisedarto whacresf nif
+lofir titteisedutsedw.
+so pesict he mrreded: "noulral no arif--be lasti, ersmegrieva roncaupe pwriltion)eros sea by meysiatity t: hudilxcenteang owatrdt), ion toreolr--ar
+ nalbarizy willretgile ss tho kir deesod, illerce, bearth tand, ave gredras vy uoncaurtso the
+m
+Epoch 10/60
+200285/200285 [==============================] - 16s 82us/step - loss: 2.4211
+
+----- Generating text after Epoch: 9
+----- diversity: 0.2
+----- Generating with seed: "nation of nature.=[5]--metaphysic reads "
+nation of nature.=[5]--metaphysic reads done f anditton. which
+there them no bee mall ata phine of ace fouthe oreat on the furtith if the fure fore
+fore severy and of the fure the fithe sore tore
+ponderithe for his of the poreeroughis the
+furthes which of pherense porsict of chets ion the goreat oullostion sorelof in the of reragsines
+aplistof the phither hices apeistound of the foret of antien and of ond pourit of all got of oul to the
+----- diversity: 0.5
+----- Generating with seed: "nation of nature.=[5]--metaphysic reads "
+nation of nature.=[5]--metaphysic reads dom hin which oughith ch se ppeion and atien, whichits if the sters if thith ivery the sotig ian the ber
+ak of and and co the beery, iof oun beemen
+
+f phis
+bacemy cins "f achems in " ouligneta pinithe ferend blistsous fferingit ingion as of encencand ixcertatin tirt if ith if the ster all ghithe
+reloferen apprithous of the forenery, so ager, and the sheres pertidities ing themenound at atthe ghore
+----- diversity: 1.0
+----- Generating with seed: "nation of nature.=[5]--metaphysic reads "
+nation of nature.=[5]--metaphysic reads deby phenephasisa dit thy madlsty, at andtithing ins thice prerimpiatie hf of th har baides thas thet whecerofos
+bundty allty of huhe af er ncsilf chemand indentounge fot hegne, wwith selunepraleditutive ghop iofis sovaly a diectued ho phiple she
+ mith ife f enchst ente ofe cotf imes iat ou batoe to furet
+ere if
+limune "fabe avelympeata "fathal "wirlacpnichome
+"erthethy whach, thiems ce tonitlat i
+----- diversity: 1.2
+----- Generating with seed: "nation of nature.=[5]--metaphysic reads "
+nation of nature.=[5]--metaphysic reads dem hplisyict, ser,
+s houstores will an hy orbacleags, os "whice
+aite tamwill d, amis whigatel, sowist ecous
+dverdity ntimely, foulegn, if shthice, chtispichicolsubs" bat ouag bet kun freaveryicism, aubida
+scaulwey wsstid, ahe e plo, paive con enty cila--whs
+aftmonk o semplisestaicisemadiniince fodsely mion pt ixtabercamiebatous baccanly,o ene hily
+mith im ly imen. ate tion wici morillfato -omith 
+Epoch 11/60
+200285/200285 [==============================] - 17s 85us/step - loss: 2.4190
+
+----- Generating text after Epoch: 10
+----- diversity: 0.2
+----- Generating with seed: " better. the delight in common, the
+plea"
+ better. the delight in common, the
+pleat on the peston the sestithit the hes ins mos in s in whaling in thing thit iop ins anithithis the thithespensespondensthe thes mithis the sesthe thelespess io thes soplits an thesperits ios the poingit ive se the pous it whithe stiel, mone sof thithis instion deverely, the has an thes at in the cesthit ins ions for the phithes. hit chimesef the stin thit his mof the s ithe shis the itse foull sit
+----- diversity: 0.5
+----- Generating with seed: " better. the delight in common, the
+plea"
+ better. the delight in common, the
+pleat on the prealiogs, thes mones ofor the sio the thit ins incalf thes the pestos mos the phithit the meselis of the sporitis thed ige te thither thithe fimesto the thes its oforense thit ans this fore this is the hesse fore fonce tiendess chessesseno bean whithe that nes the the hims has in thithele ithe shithisperithithiss bo moned it what he thes its mos thes tho acestopinstithe pewhalw the chase
+----- diversity: 1.0
+----- Generating with seed: " better. the delight in common, the
+plea"
+ better. the delight in common, the
+pleat doumit wos mo dcans have ye forthit on the nats at how
+selutho ceds moy dipecen thigle soo lownins therimrs,
+grobleso in chufis aw. the muane is be dres toit  tuens ave--pous
+
+s kines so theo. tie sedienst ipicens we puras?
+wer hese--ho whal. te, butheud, apw the mire fowerd ani
+tovt, ho enfotald,
+bour hitien. whithe ce fereis fovenitr of ch thiople. mones thus if loptoongs, an stolly. is theven
+----- diversity: 1.2
+----- Generating with seed: " better. the delight in common, the
+plea"
+ better. the delight in common, the
+pleasumeac
+moficapenithivedupapars, ife mmeerompos fftremons chictianc, mo nawheen the arivisulo ) esimin. 
+
+arlupties, the afeer eeffeed bekin weverios thit peliopulintwm, ofthaangutraashait sspuntoki; thas of endensscur belels eovin thaspsivelobyonlthith"lhace shithecenadivica ce the reos
+or hare morag do cerancounmosasils, aan
+hareva be hod hes thorigh, en beerpatly, fhe hor bet iblousrycons, bedde
+Epoch 12/60
+200285/200285 [==============================] - 18s 89us/step - loss: 2.4263
+
+----- Generating text after Epoch: 11
+----- diversity: 0.2
+----- Generating with seed: "yspeptics like what
+is convenient, so th"
+yspeptics like what
+is convenient, so the stel and mone the bele ment ef reste the
+belist, the mast the sto the the belles monem ant
+
+hally, and anlleges ant ous mas inle sos las bee
+mest--be the be bes morell to mare the sempresiby beente se bet ored romestint and mathe steveredis the mant of the stee
+the make wist us monk of verelt experted and mand ins as the ste tave the stever, the sallets of the stee be the sall toul the
+salt ant 
+----- diversity: 0.5
+----- Generating with seed: "yspeptics like what
+is convenient, so th"
+yspeptics like what
+is convenient, so the in thang at andesses, the ham inly tove
+beine mang datis at wall the lome last--the
+sere tis all ge se s brenes roke blederestall be
+the
+cascould anthes whall sous belles ing aindallestel beal calleest one laslest,
+belists listallet. bel belly the kend all all to mas mont rast oned rotall ablenges ant of ome
+s whis the sallekend atlesteed, th ther belt en allagling ane llegot ant ment matus and 
+----- diversity: 1.0
+----- Generating with seed: "yspeptics like what
+is convenient, so th"
+yspeptics like what
+is convenient, so tho soce tout ing histud fus oul amo at
+ex ctsougnes orse nalty hat ally of
+ave . iout  or
+monith urllew ag aat eake inveronog, su tho hes--eh rim ry int lxadpereinatly anithastone, south whemeas nd mlake t
+buak  oukid caskind elligkee, ne--ras ofeko dl bibsele ti g wark ntaed resestiwe and
+ghis moor
+baof--mok "freis at at ce wn chsoot wes coveis att tel gant oht oas un nde
+oubidney nela bed ualt
+in
+----- diversity: 1.2
+----- Generating with seed: "yspeptics like what
+is convenient, so th"
+yspeptics like what
+is convenient, so thas tha ate keranellots--whag
+
+he wiondply anginverly co be judgrede daclico vinjuslest
+at bhe the mans tilt
+lofrvat? hha dale tusthese--gparuble dnll" nupllirthopedraysa,
+lf ih sestotad s aplesterthace ves atino
+sveg e antho es, bsee pnol dale bonghta do: min?
+dedm nisike
+ce somed. ce sisl west on isk owe  s wiik
+asle ctarecosmed, mon takin
+to sonam atlagrigasstas indirothao sto thon thiaglest. lo
+Epoch 13/60
+200285/200285 [==============================] - 18s 88us/step - loss: 2.4244
+
+----- Generating text after Epoch: 12
+----- diversity: 0.2
+----- Generating with seed: "g very much about it, simply because its"
+g very much about it, simply because its
+ins ind anderaly the caprecouthe ther and them and thererecond and ater as
+mact as in wher and the raty the comenand ther wither and
+endiverougher and the wher ther whom nat ther and
+serabe ther as and and plopecronger as pher the
+sof the s at ther wher and ther and there whom ther whal ather whol whinger and
+romperse whil theres wher and comerever is whicher angreres the them somering the s wher
+----- diversity: 0.5
+----- Generating with seed: "g very much about it, simply because its"
+g very much about it, simply because itsene. in ing
+roferesencopreas an atr aing wall ther opresind
+wher whor ther wer gow ther ingeres at must es whald be warid
+ sare thati nommerthe sa pheresagnd ther mod
+frelleging, ther on exispis ond serpathen ther
+whor whan tren wher atrer whor gherecogr watiny whather ars tondurby whangrowhe
+sond whothers wheromechaveryongrelingither,
+whil ther mas nor gopechessind ator ther meramedusinn whorgeth
+----- diversity: 1.0
+----- Generating with seed: "g very much about it, simply because its"
+g very much about it, simply because itsince saciin
+,
+activerys noe cn them nowencins ef te matring
+ces llgica wiscenty the such,
+werling atd halg, whthaveryus nhug onver!onin caratry non thethes, at
+ustonpthee.
+[2] ure ficliycen, been corering mo
+tlefurin iucens wherwiof lood fond orcaic
+mas ess going fon ys endeling inn,
+whel asoulf vor whind h menot erandeclutinglend on" p: werit inn ecopthis whorred the
+cestre an,
+whill cousldorpboe
+----- diversity: 1.2
+----- Generating with seed: "g very much about it, simply because its"
+g very much about it, simply because its saveeally,m nextr isomoulyif, nseat; ore hersor
+muthy belthaigr,
+wh ther" noprevon"inatled iomintirfedsand fone crijuscevet thirg toomprevont reomens
+forter ne1 cimrueviriof owothdes."wl aasers whes domt af teore
+sewis bratuplly bong esedigirsiag llvaven, hrevory th thel thkino ongerneraty
+cerevemy ansios wian ensredermingosde.  ah adere.
+
+on thesicbeno med iomes, loperfous nf cher
+ad on srem--th
+Epoch 14/60
+139776/200285 [===================>{\ldots}] - ETA: 5s - loss: 2.4114
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        KeyboardInterrupt                         Traceback (most recent call last)
+
+        <ipython-input-1-bab913efc32e> in <module>()
+        111         batch\_size=128,
+        112         epochs=60,
+    --> 113         callbacks=[print\_callback]
+        114     )
+        115     ipdb.set\_trace()
+
+
+        /usr/local/lib/python3.5/dist-packages/keras/models.py in fit(self, x, y, batch\_size, epochs, verbose, callbacks, validation\_split, validation\_data, shuffle, class\_weight, sample\_weight, initial\_epoch, steps\_per\_epoch, validation\_steps, **kwargs)
+        961                               initial\_epoch=initial\_epoch,
+        962                               steps\_per\_epoch=steps\_per\_epoch,
+    --> 963                               validation\_steps=validation\_steps)
+        964 
+        965     def evaluate(self, x=None, y=None,
+
+
+        /usr/local/lib/python3.5/dist-packages/keras/engine/training.py in fit(self, x, y, batch\_size, epochs, verbose, callbacks, validation\_split, validation\_data, shuffle, class\_weight, sample\_weight, initial\_epoch, steps\_per\_epoch, validation\_steps, **kwargs)
+       1703                               initial\_epoch=initial\_epoch,
+       1704                               steps\_per\_epoch=steps\_per\_epoch,
+    -> 1705                               validation\_steps=validation\_steps)
+       1706 
+       1707     def evaluate(self, x=None, y=None,
+
+
+        /usr/local/lib/python3.5/dist-packages/keras/engine/training.py in \_fit\_loop(self, f, ins, out\_labels, batch\_size, epochs, verbose, callbacks, val\_f, val\_ins, shuffle, callback\_metrics, initial\_epoch, steps\_per\_epoch, validation\_steps)
+       1233                         ins\_batch[i] = ins\_batch[i].toarray()
+       1234 
+    -> 1235                     outs = f(ins\_batch)
+       1236                     if not isinstance(outs, list):
+       1237                         outs = [outs]
+
+
+        /usr/local/lib/python3.5/dist-packages/keras/backend/tensorflow\_backend.py in \_\_call\_\_(self, inputs)
+       2476         session = get\_session()
+       2477         updated = session.run(fetches=fetches, feed\_dict=feed\_dict,
+    -> 2478                               **self.session\_kwargs)
+       2479         return updated[:len(self.outputs)]
+       2480 
+
+
+        /usr/local/lib/python3.5/dist-packages/tensorflow/python/client/session.py in run(self, fetches, feed\_dict, options, run\_metadata)
+        903     try:
+        904       result = self.\_run(None, fetches, feed\_dict, options\_ptr,
+    --> 905                          run\_metadata\_ptr)
+        906       if run\_metadata:
+        907         proto\_data = tf\_session.TF\_GetBuffer(run\_metadata\_ptr)
+
+
+        /usr/local/lib/python3.5/dist-packages/tensorflow/python/client/session.py in \_run(self, handle, fetches, feed\_dict, options, run\_metadata)
+       1135     if final\_fetches or final\_targets or (handle and feed\_dict\_tensor):
+       1136       results = self.\_do\_run(handle, final\_targets, final\_fetches,
+    -> 1137                              feed\_dict\_tensor, options, run\_metadata)
+       1138     else:
+       1139       results = []
+
+
+        /usr/local/lib/python3.5/dist-packages/tensorflow/python/client/session.py in \_do\_run(self, handle, target\_list, fetch\_list, feed\_dict, options, run\_metadata)
+       1353     if handle is None:
+       1354       return self.\_do\_call(\_run\_fn, self.\_session, feeds, fetches, targets,
+    -> 1355                            options, run\_metadata)
+       1356     else:
+       1357       return self.\_do\_call(\_prun\_fn, self.\_session, handle, feeds, fetches)
+
+
+        /usr/local/lib/python3.5/dist-packages/tensorflow/python/client/session.py in \_do\_call(self, fn, *args)
+       1359   def \_do\_call(self, fn, *args):
+       1360     try:
+    -> 1361       return fn(*args)
+       1362     except errors.OpError as e:
+       1363       message = compat.as\_text(e.message)
+
+
+        /usr/local/lib/python3.5/dist-packages/tensorflow/python/client/session.py in \_run\_fn(session, feed\_dict, fetch\_list, target\_list, options, run\_metadata)
+       1338         else:
+       1339           return tf\_session.TF\_Run(session, options, feed\_dict, fetch\_list,
+    -> 1340                                    target\_list, status, run\_metadata)
+       1341 
+       1342     def \_prun\_fn(session, handle, feed\_dict, fetch\_list):
+
+
+        KeyboardInterrupt: 
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{Conv1D character model. Code adapted from https://github.com/keras\PYZhy{}team/keras/blob/master/examples/lstm\PYZus{}text\PYZus{}generation.py}
+         \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         
+         \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k}{import} \PY{n}{print\PYZus{}function}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{callbacks} \PY{k}{import} \PY{n}{LambdaCallback}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Sequential}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Dense}\PY{p}{,} \PY{n}{Activation}\PY{p}{,} \PY{n}{Flatten}\PY{p}{,} \PY{n}{Dropout}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{LSTM}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{optimizers} \PY{k}{import} \PY{n}{RMSprop}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{utils}\PY{n+nn}{.}\PY{n+nn}{data\PYZus{}utils} \PY{k}{import} \PY{n}{get\PYZus{}file}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Conv1D}\PY{p}{,} \PY{n}{MaxPooling1D}\PY{p}{,} \PY{n}{GlobalAveragePooling1D}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{random}
+         \PY{k+kn}{import} \PY{n+nn}{sys}
+         \PY{k+kn}{import} \PY{n+nn}{io}
+         
+         \PY{n}{path} \PY{o}{=} \PY{n}{get\PYZus{}file}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nietzsche.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{origin}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://s3.amazonaws.com/text\PYZhy{}datasets/nietzsche.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 2nd Dataset : Combined works of Shakespeare}
+         \PY{c+c1}{\PYZsh{} path = get\PYZus{}file(\PYZsq{}shakespeare\PYZus{}input.txt\PYZsq{}, origin=\PYZsq{}https://cs.stanford.edu/people/karpathy/char\PYZhy{}rnn/shakespeare\PYZus{}input.txt\PYZsq{})}
+         
+         \PY{k}{with} \PY{n}{io}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{n}{path}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{text} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{corpus length:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{chars} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{total chars:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}
+         \PY{n}{char\PYZus{}indices} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{(}\PY{n}{c}\PY{p}{,} \PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}
+         \PY{n}{indices\PYZus{}char} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{c}\PY{p}{)} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} cut the text in semi\PYZhy{}redundant sequences of maxlen characters}
+         \PY{n}{maxlen} \PY{o}{=} \PY{l+m+mi}{40}
+         \PY{n}{step} \PY{o}{=} \PY{l+m+mi}{3}
+         \PY{n}{sentences} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{next\PYZus{}chars} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{text}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{maxlen}\PY{p}{,} \PY{n}{step}\PY{p}{)}\PY{p}{:}
+             \PY{n}{sentences}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{text}\PY{p}{[}\PY{n}{i}\PY{p}{:} \PY{n}{i} \PY{o}{+} \PY{n}{maxlen}\PY{p}{]}\PY{p}{)}
+             \PY{n}{next\PYZus{}chars}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{text}\PY{p}{[}\PY{n}{i} \PY{o}{+} \PY{n}{maxlen}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nb sequences:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{sentences}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Vectorization...}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sentences}\PY{p}{)}\PY{p}{,} \PY{n}{maxlen}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{bool}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sentences}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{bool}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{sentence} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{sentences}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{t}\PY{p}{,} \PY{n}{char} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{sentence}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{char\PYZus{}indices}\PY{p}{[}\PY{n}{char}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{char\PYZus{}indices}\PY{p}{[}\PY{n}{next\PYZus{}chars}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{c+c1}{\PYZsh{} print(x.shape[0])}
+         \PY{c+c1}{\PYZsh{} print(x.shape[1])}
+         \PY{c+c1}{\PYZsh{} print(x.shape[2])}
+         
+         
+         \PY{k}{def} \PY{n+nf}{build\PYZus{}model}\PY{p}{(}\PY{n}{maxlen}\PY{p}{,} \PY{n}{chars}\PY{p}{)}\PY{p}{:}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Build model...}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{model} \PY{o}{=} \PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} model 1 : Simple Mode, 1 Hidden layer}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Conv1D}\PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{p}{(}\PY{n}{maxlen}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Conv1D}\PY{p}{(}\PY{l+m+mi}{128}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Flatten}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}  
+                 
+             \PY{c+c1}{\PYZsh{} model 2 : VGG net like architecture, 5 layers}
+         \PY{c+c1}{\PYZsh{}     model.add(Conv1D(64, 3, activation=\PYZsq{}relu\PYZsq{},input\PYZus{}shape=(maxlen, len(chars))))}
+         \PY{c+c1}{\PYZsh{}     model.add(Conv1D(64, 3, activation=\PYZsq{}relu\PYZsq{}))}
+         \PY{c+c1}{\PYZsh{}     model.add(MaxPooling1D(pool\PYZus{}size=2))}
+         \PY{c+c1}{\PYZsh{}     model.add(Conv1D(128, 3, activation=\PYZsq{}relu\PYZsq{}))}
+         \PY{c+c1}{\PYZsh{}     model.add(Conv1D(128, 3, activation=\PYZsq{}relu\PYZsq{}))}
+         \PY{c+c1}{\PYZsh{}     model.add(MaxPooling1D(pool\PYZus{}size=2))}
+         \PY{c+c1}{\PYZsh{}     model.add(Flatten())}
+         \PY{c+c1}{\PYZsh{}     model.add(Dense(len(chars), activation=\PYZsq{}softmax\PYZsq{}))  }
+             
+             \PY{c+c1}{\PYZsh{}model 3: adapted from https://keras.io/getting\PYZhy{}started/sequential\PYZhy{}model\PYZhy{}guide/}
+         \PY{c+c1}{\PYZsh{}     model.add(Conv1D(64, 3, activation=\PYZsq{}relu\PYZsq{},input\PYZus{}shape=(maxlen, len(chars))))}
+         \PY{c+c1}{\PYZsh{}     model.add(Conv1D(64, 3, activation=\PYZsq{}relu\PYZsq{}))}
+         \PY{c+c1}{\PYZsh{}     model.add(MaxPooling1D(pool\PYZus{}size=3))}
+         \PY{c+c1}{\PYZsh{}     model.add(Conv1D(128, 3, activation=\PYZsq{}relu\PYZsq{}))}
+         \PY{c+c1}{\PYZsh{}     model.add(Conv1D(128, 3, activation=\PYZsq{}relu\PYZsq{}))}
+         \PY{c+c1}{\PYZsh{}     model.add(MaxPooling1D(pool\PYZus{}size=3))}
+         \PY{c+c1}{\PYZsh{}     model.add(GlobalAveragePooling1D())}
+         \PY{c+c1}{\PYZsh{}     model.add(Dropout(0.5))}
+         \PY{c+c1}{\PYZsh{} \PYZsh{}     model.add(Flatten())}
+         \PY{c+c1}{\PYZsh{}     model.add(Dense(len(chars), activation=\PYZsq{}sigmoid\PYZsq{}))}
+             
+             
+             \PY{n}{optimizer} \PY{o}{=} \PY{n}{RMSprop}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{optimizer}\PY{o}{=}\PY{n}{optimizer}\PY{p}{)}
+         
+             \PY{k}{return} \PY{n}{model}
+         
+         \PY{k}{def} \PY{n+nf}{sample}\PY{p}{(}\PY{n}{preds}\PY{p}{,} \PY{n}{temperature}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} helper function to sample an index from a probability array}
+             \PY{n}{preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{preds}\PY{p}{)} \PY{o}{/} \PY{n}{temperature}
+             \PY{n}{exp\PYZus{}preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{preds}\PY{p}{)}
+             \PY{n}{preds} \PY{o}{=} \PY{n}{exp\PYZus{}preds} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{exp\PYZus{}preds}\PY{p}{)}
+             \PY{n}{probas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{multinomial}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{preds}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{probas}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{on\PYZus{}epoch\PYZus{}end}\PY{p}{(}\PY{n}{epoch}\PY{p}{,} \PY{n}{logs}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Function invoked at end of each epoch. Prints generated text.}
+             \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} Generating text after Epoch: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{epoch}\PY{p}{)}
+         
+             \PY{n}{start\PYZus{}index} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{text}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{maxlen} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{k}{for} \PY{n}{diversity} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{1.2}\PY{p}{]}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} diversity:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{diversity}\PY{p}{)}
+         
+                 \PY{n}{generated} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+                 \PY{n}{sentence} \PY{o}{=} \PY{n}{text}\PY{p}{[}\PY{n}{start\PYZus{}index}\PY{p}{:} \PY{n}{start\PYZus{}index} \PY{o}{+} \PY{n}{maxlen}\PY{p}{]}
+                 \PY{n}{generated} \PY{o}{+}\PY{o}{=} \PY{n}{sentence}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} Generating with seed: }\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{sentence} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{generated}\PY{p}{)}
+         
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{400}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{x\PYZus{}pred} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{maxlen}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                     \PY{k}{for} \PY{n}{t}\PY{p}{,} \PY{n}{char} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{sentence}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{x\PYZus{}pred}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{char\PYZus{}indices}\PY{p}{[}\PY{n}{char}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{1.}
+         
+                     \PY{n}{preds} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x\PYZus{}pred}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                     \PY{n}{next\PYZus{}index} \PY{o}{=} \PY{n}{sample}\PY{p}{(}\PY{n}{preds}\PY{p}{,} \PY{n}{diversity}\PY{p}{)}
+                     \PY{n}{next\PYZus{}char} \PY{o}{=} \PY{n}{indices\PYZus{}char}\PY{p}{[}\PY{n}{next\PYZus{}index}\PY{p}{]}
+         
+                     \PY{n}{generated} \PY{o}{+}\PY{o}{=} \PY{n}{next\PYZus{}char}
+                     \PY{n}{sentence} \PY{o}{=} \PY{n}{sentence}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{+} \PY{n}{next\PYZus{}char}
+         
+                     \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{next\PYZus{}char}\PY{p}{)}
+                     \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{flush}\PY{p}{(}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{if} \PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+             \PY{n}{print\PYZus{}callback} \PY{o}{=} \PY{n}{LambdaCallback}\PY{p}{(}\PY{n}{on\PYZus{}epoch\PYZus{}end}\PY{o}{=}\PY{n}{on\PYZus{}epoch\PYZus{}end}\PY{p}{)}
+         
+             \PY{n}{model} \PY{o}{=} \PY{n}{build\PYZus{}model}\PY{p}{(}\PY{n}{maxlen}\PY{p}{,} \PY{n}{chars}\PY{p}{)}
+         
+             \PY{k+kn}{import} \PY{n+nn}{ipdb}\PY{p}{;} 
+             
+             \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}
+                 \PY{n}{x}\PY{p}{,}
+                 \PY{n}{y}\PY{p}{,}
+                 \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{128}\PY{p}{,}
+                 \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{60}\PY{p}{,}
+                 \PY{n}{callbacks}\PY{o}{=}\PY{p}{[}\PY{n}{print\PYZus{}callback}\PY{p}{]}
+             \PY{p}{)}
+             \PY{n}{ipdb}\PY{o}{.}\PY{n}{set\PYZus{}trace}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+corpus length: 600893
+total chars: 57
+nb sequences: 200285
+Vectorization{\ldots}
+Build model{\ldots}
+Epoch 1/60
+ 93824/200285 [=============>{\ldots}] - ETA: 41s - loss: 2.5999
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        KeyboardInterrupt                         Traceback (most recent call last)
+
+        <ipython-input-10-b949e030043e> in <module>()
+        144         batch\_size=128,
+        145         epochs=60,
+    --> 146         callbacks=[print\_callback]
+        147     )
+        148     ipdb.set\_trace()
+
+
+        /usr/local/lib/python3.5/dist-packages/keras/models.py in fit(self, x, y, batch\_size, epochs, verbose, callbacks, validation\_split, validation\_data, shuffle, class\_weight, sample\_weight, initial\_epoch, steps\_per\_epoch, validation\_steps, **kwargs)
+        961                               initial\_epoch=initial\_epoch,
+        962                               steps\_per\_epoch=steps\_per\_epoch,
+    --> 963                               validation\_steps=validation\_steps)
+        964 
+        965     def evaluate(self, x=None, y=None,
+
+
+        /usr/local/lib/python3.5/dist-packages/keras/engine/training.py in fit(self, x, y, batch\_size, epochs, verbose, callbacks, validation\_split, validation\_data, shuffle, class\_weight, sample\_weight, initial\_epoch, steps\_per\_epoch, validation\_steps, **kwargs)
+       1703                               initial\_epoch=initial\_epoch,
+       1704                               steps\_per\_epoch=steps\_per\_epoch,
+    -> 1705                               validation\_steps=validation\_steps)
+       1706 
+       1707     def evaluate(self, x=None, y=None,
+
+
+        /usr/local/lib/python3.5/dist-packages/keras/engine/training.py in \_fit\_loop(self, f, ins, out\_labels, batch\_size, epochs, verbose, callbacks, val\_f, val\_ins, shuffle, callback\_metrics, initial\_epoch, steps\_per\_epoch, validation\_steps)
+       1221                             ins\_batch = \_slice\_arrays(ins[:-1], batch\_ids) + [ins[-1]]
+       1222                         else:
+    -> 1223                             ins\_batch = \_slice\_arrays(ins, batch\_ids)
+       1224                     except TypeError:
+       1225                         raise TypeError('TypeError while preparing batch. '
+
+
+        /usr/local/lib/python3.5/dist-packages/keras/engine/training.py in \_slice\_arrays(arrays, start, stop)
+        383             if hasattr(start, 'shape'):
+        384                 start = start.tolist()
+    --> 385             return [None if x is None else x[start] for x in arrays]
+        386         else:
+        387             return [None if x is None else x[start:stop] for x in arrays]
+
+
+        /usr/local/lib/python3.5/dist-packages/keras/engine/training.py in <listcomp>(.0)
+        383             if hasattr(start, 'shape'):
+        384                 start = start.tolist()
+    --> 385             return [None if x is None else x[start] for x in arrays]
+        386         else:
+        387             return [None if x is None else x[start:stop] for x in arrays]
+
+
+        KeyboardInterrupt: 
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}Example script to generate text from Nietzsche\PYZsq{}s writings.}
+        
+        \PY{l+s+sd}{At least 20 epochs are required before the generated text}
+        \PY{l+s+sd}{starts sounding coherent.}
+        
+        \PY{l+s+sd}{It is recommended to run this script on GPU, as recurrent}
+        \PY{l+s+sd}{networks are quite computationally intensive.}
+        
+        \PY{l+s+sd}{If you try this script on new data, make sure your corpus}
+        \PY{l+s+sd}{has at least \PYZti{}100k characters. \PYZti{}1M is better.}
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k}{import} \PY{n}{print\PYZus{}function}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{callbacks} \PY{k}{import} \PY{n}{LambdaCallback}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Sequential}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Dense}\PY{p}{,} \PY{n}{Activation}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{LSTM}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{optimizers} \PY{k}{import} \PY{n}{RMSprop}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{utils}\PY{n+nn}{.}\PY{n+nn}{data\PYZus{}utils} \PY{k}{import} \PY{n}{get\PYZus{}file}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{k+kn}{import} \PY{n+nn}{sys}
+        \PY{k+kn}{import} \PY{n+nn}{io}
+        
+        \PY{n}{path} \PY{o}{=} \PY{n}{get\PYZus{}file}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nietzsche.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{origin}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://s3.amazonaws.com/text\PYZhy{}datasets/nietzsche.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{with} \PY{n}{io}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{n}{path}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+            \PY{n}{text} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{corpus length:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{chars} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{total chars:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}
+        \PY{n}{char\PYZus{}indices} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{(}\PY{n}{c}\PY{p}{,} \PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}
+        \PY{n}{indices\PYZus{}char} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{c}\PY{p}{)} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{c} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} cut the text in semi\PYZhy{}redundant sequences of maxlen characters}
+        \PY{n}{maxlen} \PY{o}{=} \PY{l+m+mi}{40}
+        \PY{n}{step} \PY{o}{=} \PY{l+m+mi}{3}
+        \PY{n}{sentences} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{next\PYZus{}chars} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{text}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{maxlen}\PY{p}{,} \PY{n}{step}\PY{p}{)}\PY{p}{:}
+            \PY{n}{sentences}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{text}\PY{p}{[}\PY{n}{i}\PY{p}{:} \PY{n}{i} \PY{o}{+} \PY{n}{maxlen}\PY{p}{]}\PY{p}{)}
+            \PY{n}{next\PYZus{}chars}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{text}\PY{p}{[}\PY{n}{i} \PY{o}{+} \PY{n}{maxlen}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nb sequences:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{sentences}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Vectorization...}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sentences}\PY{p}{)}\PY{p}{,} \PY{n}{maxlen}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{bool}\PY{p}{)}
+        \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sentences}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{bool}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{sentence} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{sentences}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{t}\PY{p}{,} \PY{n}{char} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{sentence}\PY{p}{)}\PY{p}{:}
+                \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{char\PYZus{}indices}\PY{p}{[}\PY{n}{char}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{char\PYZus{}indices}\PY{p}{[}\PY{n}{next\PYZus{}chars}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+        
+        
+        \PY{c+c1}{\PYZsh{} build the model: a single LSTM}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Build model...}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{model} \PY{o}{=} \PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{LSTM}\PY{p}{(}\PY{l+m+mi}{128}\PY{p}{,} \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{p}{(}\PY{n}{maxlen}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Activation}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{optimizer} \PY{o}{=} \PY{n}{RMSprop}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{optimizer}\PY{o}{=}\PY{n}{optimizer}\PY{p}{)}
+        
+        
+        \PY{k}{def} \PY{n+nf}{sample}\PY{p}{(}\PY{n}{preds}\PY{p}{,} \PY{n}{temperature}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} helper function to sample an index from a probability array}
+            \PY{n}{preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{preds}\PY{p}{)} \PY{o}{/} \PY{n}{temperature}
+            \PY{n}{exp\PYZus{}preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{preds}\PY{p}{)}
+            \PY{n}{preds} \PY{o}{=} \PY{n}{exp\PYZus{}preds} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{exp\PYZus{}preds}\PY{p}{)}
+            \PY{n}{probas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{multinomial}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{preds}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{probas}\PY{p}{)}
+        
+        
+        \PY{k}{def} \PY{n+nf}{on\PYZus{}epoch\PYZus{}end}\PY{p}{(}\PY{n}{epoch}\PY{p}{,} \PY{n}{logs}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Function invoked at end of each epoch. Prints generated text.}
+            \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} Generating text after Epoch: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{epoch}\PY{p}{)}
+        
+            \PY{n}{start\PYZus{}index} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{text}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{maxlen} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{k}{for} \PY{n}{diversity} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{1.2}\PY{p}{]}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} diversity:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{diversity}\PY{p}{)}
+        
+                \PY{n}{generated} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+                \PY{n}{sentence} \PY{o}{=} \PY{n}{text}\PY{p}{[}\PY{n}{start\PYZus{}index}\PY{p}{:} \PY{n}{start\PYZus{}index} \PY{o}{+} \PY{n}{maxlen}\PY{p}{]}
+                \PY{n}{generated} \PY{o}{+}\PY{o}{=} \PY{n}{sentence}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} Generating with seed: }\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{sentence} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{generated}\PY{p}{)}
+        
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{400}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{x\PYZus{}pred} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{maxlen}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{chars}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                    \PY{k}{for} \PY{n}{t}\PY{p}{,} \PY{n}{char} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{sentence}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{x\PYZus{}pred}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{char\PYZus{}indices}\PY{p}{[}\PY{n}{char}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{1.}
+        
+                    \PY{n}{preds} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x\PYZus{}pred}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                    \PY{n}{next\PYZus{}index} \PY{o}{=} \PY{n}{sample}\PY{p}{(}\PY{n}{preds}\PY{p}{,} \PY{n}{diversity}\PY{p}{)}
+                    \PY{n}{next\PYZus{}char} \PY{o}{=} \PY{n}{indices\PYZus{}char}\PY{p}{[}\PY{n}{next\PYZus{}index}\PY{p}{]}
+        
+                    \PY{n}{generated} \PY{o}{+}\PY{o}{=} \PY{n}{next\PYZus{}char}
+                    \PY{n}{sentence} \PY{o}{=} \PY{n}{sentence}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{+} \PY{n}{next\PYZus{}char}
+        
+                    \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{next\PYZus{}char}\PY{p}{)}
+                    \PY{n}{sys}\PY{o}{.}\PY{n}{stdout}\PY{o}{.}\PY{n}{flush}\PY{p}{(}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{print\PYZus{}callback} \PY{o}{=} \PY{n}{LambdaCallback}\PY{p}{(}\PY{n}{on\PYZus{}epoch\PYZus{}end}\PY{o}{=}\PY{n}{on\PYZus{}epoch\PYZus{}end}\PY{p}{)}
+        
+        \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,}
+                  \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{128}\PY{p}{,}
+                  \PY{n}{epochs}\PY{o}{=}\PY{l+m+mi}{60}\PY{p}{,}
+                  \PY{n}{callbacks}\PY{o}{=}\PY{p}{[}\PY{n}{print\PYZus{}callback}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
